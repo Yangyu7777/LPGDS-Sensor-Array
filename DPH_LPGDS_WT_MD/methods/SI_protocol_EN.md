@@ -1,0 +1,44 @@
+# Supporting Information — Molecular dynamics simulation of the WT L-PGDS–DPH system
+
+## Scope
+
+This protocol documents the deposited WT L-PGDS–DPH molecular dynamics calculation, including the specified local starting configuration, atomistic system construction, equilibration, production sampling, and postprocessing. It contains one 5 ns production trajectory. No fatty acids or PFAS were included. The dataset is suitable for describing time-dependent structural proximity and solvent exposure within the simulated configuration, but not for estimating equilibrium binding affinities or establishing a spontaneous, unbiased ligand-entry mechanism.
+
+## Protein and ligand preparation
+
+The input WT L-PGDS model comprised 176 residues, including a C-terminal hexahistidine tag (residues 171–176). PDBFixer 1.12.0 was used to check missing residues and atoms; none were found. Existing hydrogen records were removed and hydrogens were regenerated in OpenMM Modeller at nominal pH 7.4. The Cys68–Cys165 disulfide was retained; His90 and the six tag histidines were modeled in the neutral HID state. The N terminus was protonated and the C terminus was unblocked with OXT. Protonation states remained fixed. Original source-structure accession and ligand-placement software metadata are not conclusively established in the archive and require verification against the primary preparation records.
+
+Neutral all-trans DPH (C18H16) was treated with RDKit 2023.9.6 and MMFF geometry refinement to correct double-bond geometry. Refinement used up to 5,000 optimization iterations, torsion windows near ±180° (force constant 100 in RDKit units), and heavy-atom positional restraints allowing 0.5 Å displacement (constant 10). The recorded final central-chain double-bond torsions were 174.9995°, 174.9998°, and 175.7040°. These geometry-preparation restraints were removed before production.
+
+The ligand was positioned outside the protein heavy-atom convex envelope along an approximate exterior direction defined from the initial protein–ligand geometry. The initial minimum intermolecular heavy-atom distance was 4.027 Å. Thus the model starts from a spatially specified near-protein configuration; it does not reproduce free ligand diffusion from a uniformly randomized bulk-solvent position. No ligand-directed bias was applied during unrestrained production.
+
+## Force fields and model composition
+
+Amber ff14SB (`amber14/protein.ff14SB.xml`) was used for L-PGDS; water and monatomic ions were described by TIP3P (`amber14/tip3p.xml`). DPH, dimethyl sulfoxide (DMSO), and phosphate were parameterized with OpenFF Sage 2.2.1 via SMIRNOFFTemplateGenerator (openmmforcefields 0.16.0). AM1-BCC atomic partial charges were generated using OpenFF Toolkit 0.19.0 and AmberTools 23.3. The deposited serialized `inputs/system.xml` records the exact simulated force terms. Parameter assignment was completed; independent validation of the DMSO/phosphate mixture thermodynamics or ligand binding energetics was not performed.
+
+The cubic periodic cell initially measured 82.116 Å per side (553.7113 nm³) and comprised one protein, one DPH molecule, 16,754 TIP3P waters, 224 DMSO molecules, one H2PO4−, three HPO4²−, 52 Na+, two K+, and 49 Cl− ions (55,382 total atoms). Solvent packing used Packmol 21.2.1 with 2.0 Å tolerance. The nominal solvent target was PBS at pH 7.4, approximately 137 mM added NaCl, 2.7 mM added KCl, and 5% (v/v) DMSO, with ionic species converted to discrete molecular counts and excess counterions added for neutrality. Initial added NaCl was 137.95 mM, added KCl 3.00 mM, and total phosphate 12.00 mM. The effective starting protein and DPH concentrations were each approximately 3.00 mM; these values differ from the fluorescence experiments (8 μM L-PGDS and 1 μM DPH). The nominal pH describes fixed ionization assignments rather than a dynamically simulated pH buffer.
+
+## MD integration, equilibration, and production
+
+Calculations were performed using Python 3.12.15 and OpenMM 8.6.1 on an Apple M5 Pro computer (OpenCL device index 0; single precision). Periodic boundary conditions and particle mesh Ewald electrostatics were used (1.0 nm real-space cutoff; Ewald tolerance 0.0005). Lennard-Jones interactions were truncated at 1.0 nm without a switching function, with the analytical dispersion correction enabled. Bonds involving hydrogens were constrained, water was rigid, and hydrogen-mass repartitioning was not used. A LangevinMiddleIntegrator was employed with a 1 fs timestep, 1 ps−1 collision frequency, and seed 202610200; center-of-mass motion was removed at each step. A Monte Carlo barostat (298.15 K, 1 bar, attempt interval 25 steps, seed 202610251) was active during NPT stages.
+
+Energy minimization was performed with a 10 kJ mol−1 nm−1 stopping tolerance and at most 1,000 iterations. Solute heavy atoms, including DPH, were harmonically restrained relative to their prepared positions during early preparation (potential 0.5 k d² with minimum-image distances). A 2 ps initial test was run at 50 K under NVT with k = 1,000 kJ mol−1 nm−2. Subsequent equilibration comprised 20 ps heating from 50 to 298.15 K (NVT, k = 1,000), 80 ps at 298.15 K (NVT, k = 1,000), 100 ps at 298.15 K and 1 bar (NPT, k = 1,000), 100 ps under weaker NPT restraints (k = 100), and 200 ps unrestrained NPT. Production continued for 5 ns under unrestrained NPT at 298.15 K and 1 bar. Total elapsed simulated time was 5.502 ns. No pulling force, metadynamics bias, or ligand-entry restraint was applied in production.
+
+Solute coordinates and thermodynamic records were saved every 1 ps, and complete solvent-containing coordinates every 10 ps. The production analysis used 5,000 solute frames corresponding to total simulated times 503–5502 ps. Production-average temperature and density were 298.275 K and 1.01327 g mL−1, respectively. These basic stability checks do not demonstrate equilibrium convergence.
+
+## Trajectory analysis
+
+Protein structures were least-squares aligned to the prepared pre-MD structure using the 170 core Cα atoms, excluding the C-terminal hexahistidine tag from fitting. Protein Cα RMSD and RMSF were evaluated in the aligned frame. The radius of gyration was calculated as a mass-weighted quantity over protein heavy atoms. Protein–DPH heavy-atom contacts were evaluated using periodic minimum-image distances; a frame was defined as having contact when any protein–DPH heavy-atom separation was <4.5 Å. Residue-specific contact fractions used all 5,000 production frames. Additional distance thresholds of 3.5, 4.0, and 5.0 Å were tabulated for sensitivity analysis.
+
+DPH movement was analyzed both in the protein-aligned frame and after ligand self-alignment to distinguish relative movement from internal conformational variation. Solvent-accessible surface area (SASA) was estimated using a Shrake–Rupley-like sphere-point method with a 1.4 Å probe, 960 points per atom, and 100 frames separated by 50 ps. DPH SASA was calculated with and without the protein at identical ligand conformations; the protein-occluded fraction was defined as 1 − SASA(complex)/SASA(isolated). Water oxygen atoms within 5 Å of DPH heavy atoms and DMSO molecules with any heavy atom within 4.5 Å were counted from solvent-containing frames saved every 10 ps. Analysis used NumPy 1.26.4, SciPy 1.17.1, and Matplotlib 3.10.9.
+
+In the analyzed trajectory, protein–DPH contacts were detected in 4,916/5,000 production frames (98.32%), the protein core mean Cα RMSD was 1.69 Å, and the mean protein-occluded DPH SASA fraction was 63.61%. The starting separation itself was less than the 4.5 Å contact threshold; thus this contact fraction is not a ligand-association probability or a measure of an initial binding event. SASA shielding alone cannot confirm enclosed-pocket occupancy. All frame-based statistics are descriptive and temporally correlated; no independent-replicate inference or equilibrium binding calculation is claimed.
+
+## References
+
+1. Eastman P. et al. OpenMM 7: Rapid development of high performance algorithms for molecular dynamics. *PLoS Comput Biol.* 2017, 13, e1005659. https://doi.org/10.1371/journal.pcbi.1005659
+2. Maier J. A. et al. ff14SB: Improving the accuracy of protein side chain and backbone parameters from ff99SB. *J Chem Theory Comput.* 2015, 11, 3696–3713. https://doi.org/10.1021/acs.jctc.5b00255
+3. Open Force Field Initiative. Sage force field and version-specific citation guidance. https://openforcefield.org/science/how-to-cite/
+4. OpenMM documentation. Theory and standard forces. https://docs.openmm.org/latest/userguide/theory/02_standard_forces.html
+
+**Reporting note:** Before journal submission, verify the protein structural source and original ligand-placement procedure against the primary preparation records. Do not replace these missing metadata with assumed citations or software settings.
