@@ -33,7 +33,7 @@ Use the actual cleaned workbooks as inputs; these are not part of this code repo
 ## Shared analysis principles
 
 - Six fluorescence-response channels: WT, LA, LB, LC, LD and LE.
-- Ten replicates per analyte class, with six randomly selected for training and four held out for prediction.
+- Ten replicates per analyte class, with six randomly assigned to training and four held out for prediction.
 - Standardization and LDA are fitted on training observations only.
 - The 95% ellipses are descriptive covariance regions for the training scores.
 - Classification accuracy from a single split does not constitute independent external validation.
