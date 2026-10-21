@@ -1,0 +1,48 @@
+# LPGDS sensor array
+
+**Engineered L-PGDS–DPH fluorescence sensor arrays for fatty acids and PFAS**
+
+This repository contains reproducible Python workflows for six engineered L-PGDS receptor channels: WT, LA, LB, LC, LD, and LE.
+
+## Research modules
+
+| Directory | Analytes | Workflow |
+| --- | --- | --- |
+| [Fatty_acids](Fatty_acids/) | Fatty-acid chain lengths, unsaturation, concentration gradients and mixtures | LDA, response profiles, training and held-out predictions |
+| [PFAS](PFAS/) | PFOA, PFNA, PFDA, PFHxS, PFOS; PFOA/PFOS mixtures and concentration gradients | LDA, response profiles, held-out confusion matrices |
+| [DPH_LPGDS_WT_MD](DPH_LPGDS_WT_MD/) | DPH and wild-type L-PGDS | Selected R3 MD dataset, English figures, complete raw trajectories (restorable gzip parts), and Chinese/English SI protocols |
+
+## Reproduce
+
+Fatty acids:
+
+```bash
+pip install -r Fatty_acids/requirements.txt
+python Fatty_acids/analysis_pipeline.py --input fatty_acids.xlsx --output-dir Fatty_acids/analysis_output --seed 20260921
+```
+
+PFAS:
+
+```bash
+pip install -r PFAS/requirements.txt
+python PFAS/analyze_pfas.py --input pfas.xlsx --output PFAS/results --seed 20261017
+```
+
+Use the actual cleaned workbooks as inputs; these are not part of this code repository. For sheet names and workflow details, consult each module's README.
+
+## Shared analysis principles
+
+- Six fluorescence-response channels: WT, LA, LB, LC, LD and LE.
+- Ten replicates per analyte class, with six randomly selected for training and four held out for prediction.
+- Standardization and LDA are fitted on training observations only.
+- The 95% ellipses are descriptive covariance regions for the training scores.
+- Classification accuracy from a single split does not constitute independent external validation.
+- Bar-chart errors come from the supplied experimental summary sheets; confirm whether their uncertainties are SD or SEM.
+
+## Scope
+
+The repository documents **both fatty-acid and PFAS fingerprint discrimination** on the L-PGDS–DPH platform. The two datasets have separate scripts and dependencies so either study can be reproduced independently.
+
+## DPH–L-PGDS (WT) molecular dynamics / 分子动力学模拟
+
+The [MD module](DPH_LPGDS_WT_MD/) contains only the selected PROTEIN_DPH_R3 dataset. See the [English SI protocol](DPH_LPGDS_WT_MD/methods/SI_protocol_EN.md) or [中文操作流程](DPH_LPGDS_WT_MD/methods/SI_protocol_CN.md). Original large trajectories and XML files are losslessly stored as gzip parts; `python3 scripts/restore_data.py` restores them and `python3 scripts/verify_data.py` checks the original SHA256 hashes. This single selected trajectory is descriptive and is not a complete replicate ensemble or an affinity measurement.
