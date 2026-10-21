@@ -1,0 +1,19 @@
+{
+  "source_sha256": {
+    "analysis/ligand_SASA.csv": "18a7ab45534721bde77c7b61f8f376f946c1206d9af26056c9bb9a8fd7999ab5",
+    "analysis/solvent_neighbors.csv": "ced24f906988195b47134515744ef0d697a59730e37749e187e34666291a8042",
+    "analysis/residue_contacts.npz": "feca0c02ff0442b2f55712ff5babfbc1de37ea67cd91a326c193a02ca8f829fc"
+  },
+  "dimensions_mm": {
+    "individual": [
+      88,
+      96
+    ],
+    "combined": [
+      180,
+      96
+    ]
+  },
+  "dpi": 600,
+  "source_data_unchanged": true
+}
