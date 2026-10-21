@@ -1,6 +1,6 @@
 # Molecular dynamics of C18:2 near a preformed WT L-PGDS–DPH configuration
 
-This directory provides simulation inputs, complete restorable trajectories, analysis, English figures, and reproducibility scripts for **FA_R2**, a 5 ns atomistic molecular dynamics trajectory of one WT L-PGDS, one DPH, and one C18:2 carboxylate. The calculation began from the final coordinates of the [WT–DPH dataset](../DPH_LPGDS_WT_MD/), after addition of an exterior fatty acid. It is a newly equilibrated branch with reassigned velocities, not a seamless extension of the parent trajectory.
+This directory provides simulation inputs, complete restorable trajectories, analysis, English figures, and reproducibility scripts for **WT–DPH–C18:2**, a 5 ns atomistic molecular dynamics trajectory of one WT L-PGDS, one DPH, and one C18:2 carboxylate. The calculation began from the final coordinates of the [WT–DPH dataset](../DPH_LPGDS_WT_MD/), after addition of an exterior fatty acid. It is a newly equilibrated branch with reassigned velocities, not a seamless extension of the parent trajectory.
 
 The fatty acid is **(9E,12E)-octadeca-9,12-dienoate, CAS 506-21-8**, modeled as a monoanion (residue FAM). It is not the common cis,cis linoleate isomer. No PFAS molecule is present in this deposited system.
 
@@ -50,7 +50,7 @@ Across 5,000 production frames, DPH–WT, C18:2–WT, and DPH–C18:2 heavy-atom
 
 Each heatmap cell shows the percentage of frames in a 50 ps bin in which any ligand heavy atom was within **4.5 Å** of any heavy atom of the indicated WT residue. The left panel is DPH–WT; the right panel is C18:2–WT. These are proximity contacts, not specifically hydrogen bonds. See [all figures](figures/) and [coordinate snapshots](figures/FigS02_coordinate_snapshots.png).
 
-FA_R2 was selected after inspecting outcomes as a representative configuration of interest. The FA/control repeat summary in `analysis/FA_control_repeat_context.csv` preserves variation across the original three velocity repeats; it is not a deposit of the other raw trajectories. This selected 5 ns trajectory supports descriptive local contacts, not cooperative affinity, competition, enclosed-pocket residence, or fluorescence enhancement. The protein RMSD rises late in the trajectory; equilibrium convergence is not established. Production starts after preparation, when the fatty acid is already near DPH.
+This trajectory was selected after inspecting outcomes as a representative configuration of interest. The FA/control repeat summary in `analysis/FA_control_repeat_context.csv` preserves variation across the original three velocity repeats; it is not a deposit of the other raw trajectories. This selected 5 ns trajectory supports descriptive local contacts, not cooperative affinity, competition, enclosed-pocket residence, or fluorescence enhancement. The protein RMSD rises late in the trajectory; equilibrium convergence is not established. Production starts after preparation, when the fatty acid is already near DPH.
 
 ## Restore and verify original data
 
@@ -67,22 +67,24 @@ The complete solvent/solute trajectories and XML/state files are losslessly gzip
 After restoring data and installing the recorded scientific dependencies:
 
 ```bash
-python scripts/analyze_FA_R2.py
-python scripts/plot_FA_R2.py
+python scripts/analyze_ternary.py
+python scripts/plot_ternary.py
 ```
 
-The first command recalculates distance/contact/SASA/solvent analysis from the complete raw trajectories; the second generates the ten displayed figure sets and supplemental motion metrics. They overwrite derived analysis and figures, not raw trajectories. The analysis command also leaves four basic exporter plots in `analysis/`. The small contextual repeat table is archived evidence and is not reconstructed from FA_R2 alone. See `scripts/requirements-analysis.txt` and the detailed protocol.
+The first command recalculates distance/contact/SASA/solvent analysis from the complete raw trajectories; the second generates the ten displayed figure sets and supplemental motion metrics. They overwrite derived analysis and figures, not raw trajectories. The analysis command also leaves four basic exporter plots in `analysis/`. The small contextual repeat table is archived evidence and is not reconstructed from this trajectory alone. See `scripts/requirements-analysis.txt` and the detailed protocol.
 
 Optional MD rerun from the deposited prepared system (OpenCL and RDKit required):
 
 ```bash
-python scripts/run_FA_R2.py smoke
-python scripts/run_FA_R2.py production
+python scripts/run_ternary.py smoke
+python scripts/run_ternary.py production
 ```
 
-The runner writes only to `reproduced_FA_R2/` and refuses an existing smoke-run directory or an already started production phase. Numerical trajectories need not be bitwise identical across platforms. The restored `inputs/system.xml` and `raw/running-system.xml` are the authoritative parameter records.
+The runner writes only to `reproduced_ternary/` and refuses an existing smoke-run directory or an already started production phase. Numerical trajectories need not be bitwise identical across platforms. The restored `inputs/system.xml` and `raw/running-system.xml` are the authoritative parameter records.
 
 ## Documentation
+
+Figures and main documentation use the chemical-system name WT–DPH–C18:2. Original run identifiers remain in raw metadata and `provenance/display_naming.json` for traceability.
 
 - [Detailed English simulation protocol](methods/SI_protocol_EN.md)
 - [Supporting Information methodology](methods/SI_methods_EN.md)

@@ -1,4 +1,4 @@
-load snapshots/aligned_snapshot_5502ps.pdb, FA_R2
+load snapshots/aligned_snapshot_5502ps.pdb, WT_DPH_C18_2
 hide everything
 show cartoon, polymer.protein
 color gray70, polymer.protein

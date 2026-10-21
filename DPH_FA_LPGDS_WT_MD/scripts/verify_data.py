@@ -1,4 +1,4 @@
-"""Verify original FA_R2 files against the public checksum manifest."""
+"""Verify original WT–DPH–C18:2 files against the public checksum manifest."""
 from pathlib import Path
 import csv,hashlib,sys
 root=Path(__file__).resolve().parents[1];errors=[];count=0
@@ -12,4 +12,4 @@ with (root/'DATA_SHA256.csv').open() as f:
   if h.hexdigest()!=row['sha256'] or p.stat().st_size!=int(row['bytes']):errors.append('Mismatch: '+row['relative_path'])
   count+=1
 if errors:print('\n'.join(errors));sys.exit(1)
-print('All',count,'original FA_R2 files passed SHA256 verification.')
+print('All',count,'original WT–DPH–C18:2 files passed SHA256 verification.')

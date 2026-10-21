@@ -8,7 +8,7 @@ from rdkit.Chem import rdMolTransforms
 from openmm import app,unit,XmlSerializer,Platform,LangevinMiddleIntegrator,CustomExternalForce,MonteCarloBarostat
 root=Path(__file__).resolve().parents[1];mode='FA';phase=sys.argv[1];replica=2
 if phase not in ['smoke','production']:raise ValueError('Use smoke or production')
-name='FA_R2';source=root/'inputs';out=root/'reproduced_FA_R2';statuspath=out/'status.json';seed=2026102102;ligand_name='DPH'
+name='FA_R2';source=root/'inputs';out=root/'reproduced_ternary';statuspath=out/'status.json';seed=2026102102;ligand_name='DPH'
 if phase=='smoke':
  if out.exists():raise RuntimeError('Output exists; refusing duplicate smoke run')
  out.mkdir();status={'status':'starting','mode':mode,'replica':replica,'independent_velocity_repeat':True,'source_endpoint':'Selected_MD_20261018/01_PROTEIN_DPH_R3, total5502ps','comparison':'Resident DPH; exterior competitor or matched control; no pushing force','pid':os.getpid(),'stage':'minimization','completed_stages':[],'planned_production_ps':5000,'planned_equilibration_ps':500,'short_test_ps':2,'timestep_fs':1,'random_seed':seed,'full_save_interval_ps':10,'solute_save_interval_ps':1,'limitations':'Independent velocity replica conditional on a fixed locally chosen start; no affinity or guaranteed binding; no experimental concentration match; provisional solvent model'}

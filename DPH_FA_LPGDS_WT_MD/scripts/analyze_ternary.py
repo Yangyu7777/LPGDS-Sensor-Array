@@ -5,7 +5,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 from openmm import app,unit
 from md_analysis_utils import read_dcd,kabsch
-root=Path(__file__).resolve().parents[1];mode='FA';rep=2;name='FA_R2';raw=root/'raw';out=root/'analysis';out.mkdir(exist_ok=True);source=root/'inputs'
+root=Path(__file__).resolve().parents[1];mode='FA';rep=2;name='WT–DPH–C18:2';raw=root/'raw';out=root/'analysis';out.mkdir(exist_ok=True);source=root/'inputs'
 assert json.loads((raw/'status.json').read_text())['status']=='complete'
 p=app.PDBFile(str(raw/'solute-topology.pdb'));at=list(p.topology.atoms());xyz,boxes=read_dcd(raw/'solute-trajectory.dcd');time=np.arange(3,5503);assert len(xyz)==len(time);prod=time>502
 ip=app.PDBFile(str(source/'solvated.pdb'));ia=list(ip.topology.atoms());keep=[a.index for a in ia if a.residue.name not in {'HOH','DMS','PH1','PH2','NA','K','CL'}];ref=np.load(source/'coordinates_nm.npy')[keep]*10
