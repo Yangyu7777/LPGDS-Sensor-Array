@@ -10,7 +10,7 @@ This repository contains reproducible Python workflows for six engineered L-PGDS
 | --- | --- | --- |
 | [Fatty_acids](Fatty_acids/) | Fatty-acid chain lengths, unsaturation, concentration gradients and mixtures | LDA, response profiles, training and held-out predictions |
 | [PFAS](PFAS/) | PFOA, PFNA, PFDA, PFHxS, PFOS; PFOA/PFOS mixtures and concentration gradients | LDA, response profiles, held-out confusion matrices |
-| [DPH_LPGDS_WT_MD](DPH_LPGDS_WT_MD/) | DPH and wild-type L-PGDS | Selected R3 MD dataset, English figures, complete raw trajectories (restorable gzip parts), and Chinese/English SI protocols |
+| [DPH_LPGDS_WT_MD](DPH_LPGDS_WT_MD/) | DPH and wild-type L-PGDS | WT–DPH MD simulation data, figures, restorable raw trajectories, and English SI methods |
 
 ## Reproduce
 
@@ -43,6 +43,6 @@ Use the actual cleaned workbooks as inputs; these are not part of this code repo
 
 The repository documents **both fatty-acid and PFAS fingerprint discrimination** on the L-PGDS–DPH platform. The two datasets have separate scripts and dependencies so either study can be reproduced independently.
 
-## DPH–L-PGDS (WT) molecular dynamics / 分子动力学模拟
+## DPH–L-PGDS (WT) molecular dynamics
 
-The [MD module](DPH_LPGDS_WT_MD/) contains only the selected PROTEIN_DPH_R3 dataset. See the [English SI protocol](DPH_LPGDS_WT_MD/methods/SI_protocol_EN.md) or [中文操作流程](DPH_LPGDS_WT_MD/methods/SI_protocol_CN.md). Original large trajectories and XML files are losslessly stored as gzip parts; `python3 scripts/restore_data.py` restores them and `python3 scripts/verify_data.py` checks the original SHA256 hashes. This single selected trajectory is descriptive and is not a complete replicate ensemble or an affinity measurement.
+The [MD module](DPH_LPGDS_WT_MD/) documents one WT–DPH molecular dynamics trajectory, including simulation inputs, analysis, figures, and [English SI methods](DPH_LPGDS_WT_MD/methods/SI_methods_EN.md). Original large trajectories and XML files are losslessly stored as gzip parts. Run `python3 DPH_LPGDS_WT_MD/scripts/restore_data.py` to restore the archived files and `python3 DPH_LPGDS_WT_MD/scripts/verify_data.py` to check the deposited SHA-256 hashes. This single trajectory provides descriptive structural observations, not an independently replicated binding assessment or an affinity measurement.
