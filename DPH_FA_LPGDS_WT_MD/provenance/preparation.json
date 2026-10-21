@@ -1,0 +1,56 @@
+{
+  "source_run": "Selected_MD_20261018/01_PROTEIN_DPH_R3",
+  "source_time_ps": 5502.000000662155,
+  "source_state_sha256": "d68f371439b7337671cb7c0611c32838d98d32b4956095bdeb1e5007802060ce",
+  "box_A": [
+    82.45139943518942,
+    82.45139943518942,
+    82.45139943518942
+  ],
+  "DPH_initial_min_protein_A": 3.202564414412127,
+  "DPH_heavy_centroid_A": [
+    44.098736974928116,
+    37.92999863624573,
+    45.76065911187066
+  ],
+  "initial_outward_direction": [
+    0.9059950356184702,
+    -0.19734314436082967,
+    0.37447119890382424
+  ],
+  "source_pose_interpretation": "Selected protein-contacting, geometrically shielded endpoint. Closed-cavity membership not independently established.",
+  "branches": {
+    "FA": {
+      "competitor": "FAM",
+      "min_competitor_protein_A": 6.097387860687252,
+      "min_competitor_DPH_A": 8.15959128294142,
+      "min_competitor_nonwater_solvent_A": 2.72125694714573,
+      "all_competitor_heavy_outside_protein_hull": true,
+      "removed_overlapping_waters": 24,
+      "additional_water_replaced_by_Na": 1,
+      "placement_distance_from_resident_DPH_centroid_A": 18.0,
+      "placement_twist_deg": 60,
+      "placement_cone_tilt_deg": 15,
+      "placement_cone_azimuth_deg": 60,
+      "actual_approach_direction": [
+        0.7802465237498919,
+        -0.17080957802548932,
+        0.6016971416177439
+      ],
+      "total_atoms": 55359,
+      "total_charge_e": 1.9856512267768522e-14,
+      "max_retained_protein_DPH_coordinate_difference_A": 0.0,
+      "solvent_counts": {
+        "CL": 49,
+        "DMS": 224,
+        "HOH": 16729,
+        "K": 2,
+        "NA": 53,
+        "PH1": 1,
+        "PH2": 3
+      },
+      "source_velocities": "Reassigned from declared replica seed in each branch, not a continuous checkpoint trajectory",
+      "initialization": "Full-precision coordinates_nm.npy, periodic box from exact source state"
+    }
+  }
+}

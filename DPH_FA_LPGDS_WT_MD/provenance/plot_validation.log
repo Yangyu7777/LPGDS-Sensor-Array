@@ -1,0 +1,35 @@
+THERMO_COLUMNS ('Step', 'Time_ps', 'Potential_Energy_kJmole', 'Kinetic_Energy_kJmole', 'Temperature_K', 'Box_Volume_nm3', 'Density_gmL', 'Speed_nsday')
+{
+  "run": "FA_R2",
+  "branch": "FA",
+  "replica": 2,
+  "production_frames": 5000,
+  "production_ns": 5,
+  "DPH_contact_fraction": 1.0,
+  "DPH_last_1ns_contact_fraction": 1.0,
+  "DPH_final_min_protein_A": 3.290105157458643,
+  "DPH_final_centroid_displacement_A": 2.220866159528468,
+  "DPH_final_outward_projection_A": -0.8222417821997099,
+  "DPH_mean_protein_occluded_fraction": 0.6553004808292713,
+  "DPH_last_saved_SASA_protein_occluded_fraction": 0.6656531660833693,
+  "SASA_last_time_ps": 5500.0,
+  "DPH_mean_water_neighbors": 15.158,
+  "competitor_contact_fraction": 0.9962,
+  "competitor_final_min_protein_A": 2.948270505340832,
+  "DPH_competitor_contact_fraction": 0.946,
+  "scope": "Endpoint-conditional exploratory branch; inspect all repeats and control; no guaranteed replacement or closed-cavity classification",
+  "sha256": {
+    "solute-trajectory.dcd": "87254b0f7706b72d6f20dcb4d95ae4b92e8aa098cb06fc38a33d302fadc31667",
+    "full-trajectory.dcd": "370d186bd4cb76d3ace3a27306f49b02bccbc9109af2814d55c747411f7fa356"
+  },
+  "protein_core_CA_RMSD_mean_A": 1.3634286030035636,
+  "protein_Rg_mean_A": 16.276362792994256,
+  "protein_core_CA_RMSF_mean_A": 0.7754767011480741,
+  "DPH_mean_self_fit_RMSD_A": 0.4201938491449307,
+  "FA_mean_self_fit_RMSD_A": 2.1683825651904094,
+  "DPH_mean_DMSO_neighbors": 2.546,
+  "DPH_mean_total_occluded_fraction": 0.7629519908766441,
+  "mean_temperature_K": 298.23701462577634,
+  "mean_density_g_ml": 1.0132675121897483
+}
+FIGURES ['Fig01_pairwise_distances', 'Fig02_protein_RMSD_and_Rg', 'Fig03_protein_RMSF', 'Fig04_ligand_motion', 'Fig05_DPH_exposure_and_hydration', 'Fig06_contacts_and_DMSO', 'Fig07_residue_contact_heatmaps', 'Fig08_residue_contact_occupancy', 'FigS01_temperature_and_density', 'FigS02_coordinate_snapshots']

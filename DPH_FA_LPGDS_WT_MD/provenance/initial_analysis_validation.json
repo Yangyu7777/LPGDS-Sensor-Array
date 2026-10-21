@@ -1,0 +1,9 @@
+{
+  "solute-trajectory.dcd": true,
+  "full-trajectory.dcd": true,
+  "5000_production_frames": true,
+  "DPH_contact_fraction": true,
+  "competitor_contact_fraction": true,
+  "DPH_competitor_contact_fraction": true,
+  "30_figure_exports": true
+}

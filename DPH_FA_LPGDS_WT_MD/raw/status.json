@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "mode": "FA",
+  "replica": 2,
+  "independent_velocity_repeat": true,
+  "source_endpoint": "Selected_MD_20261018/01_PROTEIN_DPH_R3, total5502ps",
+  "comparison": "Resident DPH; exterior competitor or matched control; no pushing force",
+  "pid": 54530,
+  "stage": "production_pilot",
+  "completed_stages": [
+    "heating",
+    "NVT",
+    "NPT_strong",
+    "NPT_weak",
+    "NPT_release",
+    "production_pilot"
+  ],
+  "planned_production_ps": 5000,
+  "planned_equilibration_ps": 500,
+  "short_test_ps": 2,
+  "timestep_fs": 1,
+  "random_seed": 2026102102,
+  "full_save_interval_ps": 10,
+  "solute_save_interval_ps": 1,
+  "limitations": "Independent velocity replica conditional on a fixed locally chosen start; no affinity or guaranteed binding; no experimental concentration match; provisional solvent model",
+  "device": "Apple M5 Pro",
+  "precision": "single",
+  "step": 5502000,
+  "time_ps": 5502.000000662155,
+  "min_ligand_partner_heavy_A": 3.2901056274642633,
+  "small_molecule_dihedrals_deg": {
+    "DPH": [
+      -177.51532073166197,
+      178.02412435256267,
+      176.26501282385343
+    ],
+    "FAM": [
+      171.12701264940233,
+      -172.57967374039023
+    ]
+  },
+  "potential_energy_kj_mol": -771013.7580759684,
+  "restraint_k": 0.0,
+  "short_test_passed": true,
+  "minimization_passed": true,
+  "stage_duration_ps": 5000,
+  "preproduction_screen": {
+    "mean_temperature_K": 298.4285247691487,
+    "mean_density_g_ml": 1.0129040546612307,
+    "density_range_g_ml": 0.007727137060657974
+  },
+  "elapsed_seconds": 9935.543006833002,
+  "production_completed_ps": 5000
+}
