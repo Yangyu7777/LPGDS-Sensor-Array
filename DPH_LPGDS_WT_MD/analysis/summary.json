@@ -1,0 +1,126 @@
+{
+  "system": "Protein–DPH R3",
+  "production_frames": 5000,
+  "production_duration_ns": 5,
+  "analysis_reference": "Pre-MD prepared structure; fit 170 core C-alpha atoms; His6 excluded from fit",
+  "contact_fraction": 0.9832,
+  "contact_frames": 4916,
+  "min_distance_A": 2.7356742717303555,
+  "final_min_distance_A": 3.2025660161217626,
+  "mean_core_CA_RMSD_A": 1.6935396386681816,
+  "mean_heavy_mass_weighted_Rg_A": 16.455948914669015,
+  "mean_core_CA_RMSF_A": 0.9133825304273712,
+  "ligand_final_protein_aligned_RMSD_A": 20.92198044819574,
+  "ligand_final_self_aligned_RMSD_A": 1.2038349178903371,
+  "ligand_final_net_displacement_A": 19.148810964276063,
+  "mean_SASA_A2": 191.94757918406324,
+  "final_SASA_A2": 145.54095556193596,
+  "mean_protein_occluded_fraction": 0.6360812759178609,
+  "final_protein_occluded_fraction": 0.7253126222917927,
+  "final_SASA_resolution_difference_percentage_points": 0.30465391229147487,
+  "SASA_frames": 100,
+  "mean_water_O_within5A": 23.638,
+  "mean_DMSO_within4_5A": 1.964,
+  "mean_temperature_K": 298.275253651325,
+  "mean_density_g_mL": 1.0132726877392537,
+  "top_contacts": [
+    [
+      "PHE122",
+      0.904
+    ],
+    [
+      "TRP91",
+      0.8778
+    ],
+    [
+      "TYR95",
+      0.8628
+    ],
+    [
+      "SER112",
+      0.8284
+    ],
+    [
+      "TRP33",
+      0.8268
+    ],
+    [
+      "TYR86",
+      0.8228
+    ],
+    [
+      "MET73",
+      0.7808
+    ],
+    [
+      "VAL97",
+      0.714
+    ],
+    [
+      "MET124",
+      0.464
+    ],
+    [
+      "SER31",
+      0.3712
+    ],
+    [
+      "SER32",
+      0.2468
+    ],
+    [
+      "LEU75",
+      0.1742
+    ],
+    [
+      "LEU58",
+      0.1246
+    ],
+    [
+      "GLY119",
+      0.1186
+    ],
+    [
+      "LEU110",
+      0.1178
+    ]
+  ],
+  "independent_state_endpoint_A": 3.202564414412127,
+  "endpoint_DCD_difference_A": 0.0000016017096355902538,
+  "actual_system_settings": {
+    "total_atoms": 55382,
+    "protein_residues": 176,
+    "core_residues": 170,
+    "His_tag_residues": 6,
+    "counts_solvent_ions": {
+      "HOH": 16754,
+      "DMS": 224,
+      "PH1": 1,
+      "PH2": 3,
+      "NA": 52,
+      "K": 2,
+      "CL": 49
+    },
+    "initial_box_A": [
+      82.11600000000001,
+      82.11600000000001,
+      82.11600000000001
+    ],
+    "initial_volume_nm3": 553.7112637368962,
+    "initial_protein_and_ligand_concentration_mM": 2.998925931120078,
+    "production_mean_inverse_volume_protein_mM": 2.9568883935540913,
+    "net_charge_e": 2.0154884705636533e-14,
+    "constraints": 52958,
+    "nonbonded_method_enum": 4,
+    "cutoff_nm": 1,
+    "ewald_tolerance": 0.0005,
+    "switching": false,
+    "dispersion_correction": true,
+    "initial_min_heavy_distance_A": 4.027181893086037,
+    "hydrogen_masses_Da": [
+      1.007947,
+      1.008
+    ]
+  },
+  "statistical_scope": "One deposited 5 ns trajectory; temporally correlated frame statistics are descriptive and do not establish binding affinity, spontaneous association, or enclosed-pocket residence."
+}

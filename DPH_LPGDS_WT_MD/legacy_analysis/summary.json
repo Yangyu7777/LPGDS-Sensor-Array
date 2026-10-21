@@ -1,0 +1,81 @@
+{
+  "run": "PROTEIN_DPH_R3",
+  "seed": 202610200,
+  "production_frames": 5000,
+  "production_ps": 5000,
+  "contact_fraction": 0.9832,
+  "final_min_distance_A": 3.2025660161217626,
+  "minimum_distance_A": 2.7356742717303555,
+  "top_contacts": [
+    [
+      "PHE122",
+      0.904
+    ],
+    [
+      "TRP91",
+      0.8778
+    ],
+    [
+      "TYR95",
+      0.8628
+    ],
+    [
+      "SER112",
+      0.8284
+    ],
+    [
+      "TRP33",
+      0.8268
+    ],
+    [
+      "TYR86",
+      0.8228
+    ],
+    [
+      "MET73",
+      0.7808
+    ],
+    [
+      "VAL97",
+      0.714
+    ],
+    [
+      "MET124",
+      0.464
+    ],
+    [
+      "SER31",
+      0.3712
+    ],
+    [
+      "SER32",
+      0.2468
+    ],
+    [
+      "LEU75",
+      0.1742
+    ],
+    [
+      "LEU58",
+      0.1246
+    ],
+    [
+      "GLY119",
+      0.1186
+    ],
+    [
+      "LEU110",
+      0.1178
+    ]
+  ],
+  "mean_partner_fit_RMSD_A": 1.7061991837129797,
+  "mean_temperature_K": 298.275253651325,
+  "mean_density_g_ml": 1.0132726877392537,
+  "mean_ligand_water_O_within5A": 23.638,
+  "mean_ligand_DMSO_within4_5A": 1.964,
+  "scope": "Fixed-start independent velocity replicate; no pose robustness or affinity inference",
+  "sha256": {
+    "solute-trajectory.dcd": "bfdee274e9f80f592f5fc9ea76eeef4a54d4a97b367e214a52f19ae91ca6a6f5",
+    "full-trajectory.dcd": "39a6ff8b056ad49c9d76e0e20adf9c9b431d5fb3bda95491a932e6722921c8fa"
+  }
+}
