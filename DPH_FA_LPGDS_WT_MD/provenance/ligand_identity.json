@@ -1,0 +1,25 @@
+{
+  "acid_CAS": "60-33-3",
+  "PubChem_CID": 5280450,
+  "isomer": "9Z,12Z",
+  "simulated_form": "C18H31O2- linoleate",
+  "smiles": "[H]/[C](=[C](\\[H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[H])[C]([H])([H])/[C]([H])=[C](/[H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[C]([H])([H])[C](=[O])[O-]",
+  "carbon_double_bond_positions": [
+    9,
+    12
+  ],
+  "double_bond_dihedral_degrees": [
+    -0.11346346419238976,
+    -2.4551719687180844
+  ],
+  "atoms": 51,
+  "charge_sum_e": -1.000000000000001,
+  "charges": "independent AM1-BCC via AmberTools",
+  "coordinate_generation": "RDKit ETKDGv3 seed20261022; MMFF optimization max5000 (converged)",
+  "forcefield": "openff-2.2.1",
+  "parameterization_passed": true,
+  "references": [
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5280450",
+    "https://webbook.nist.gov/cgi/cbook.cgi?ID=60-33-3"
+  ]
+}

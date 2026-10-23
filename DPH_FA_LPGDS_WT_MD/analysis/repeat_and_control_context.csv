@@ -1,0 +1,7 @@
+system,original_run,status,total_time_ps,DPH_contact_fraction,FA_contact_fraction,DPH_FA_contact_fraction,joint_contact_fraction,WT_occluded_DPH_fraction,water_O_mean
+"cis,cis linoleate",FA_R1,complete,5502.000000662155,1.0,0.7974,0.4648,0.4576,0.7099087320502275,15.928
+"cis,cis linoleate",FA_R2,complete,5502.000000662155,1.0,1.0,0.9918,0.9918,0.6005717152618952,18.898
+"cis,cis linoleate",FA_R3,complete,5502.000000662155,1.0,0.475,0.0,0.0,0.6374023945669657,18.826
+WT–DPH endpoint-continuation control,CONTROL_R1,complete,5502,1.0,,,,0.7811356566092996,11.618
+WT–DPH endpoint-continuation control,CONTROL_R2,complete,5502,1.0,,,,0.7156610695627219,17.306
+WT–DPH endpoint-continuation control,CONTROL_R3,complete,5502,1.0,,,,0.6845956880410149,19.742

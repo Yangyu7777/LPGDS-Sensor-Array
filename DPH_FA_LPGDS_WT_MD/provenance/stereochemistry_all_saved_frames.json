@@ -1,0 +1,16 @@
+{
+  "DPH": {
+    "expected": "E",
+    "double_bonds": 3,
+    "all_5500_saved_frames_correct": true,
+    "min_absolute_dihedral_deg": 146.71485085204597,
+    "max_absolute_dihedral_deg": 179.99966436476538
+  },
+  "FAM": {
+    "expected": "Z",
+    "double_bonds": 2,
+    "all_5500_saved_frames_correct": true,
+    "min_absolute_dihedral_deg": 0.0007575041995377564,
+    "max_absolute_dihedral_deg": 47.752787711755
+  }
+}

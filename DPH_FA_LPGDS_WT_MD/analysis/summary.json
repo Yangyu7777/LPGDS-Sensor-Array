@@ -1,24 +1,28 @@
 {
-  "run": "WT\u2013DPH\u2013C18:2",
+  "run": "FA_R2",
   "branch": "FA",
   "replica": 2,
   "production_frames": 5000,
   "production_ns": 5,
   "DPH_contact_fraction": 1.0,
   "DPH_last_1ns_contact_fraction": 1.0,
-  "DPH_final_min_protein_A": 3.290105157458643,
-  "DPH_final_centroid_displacement_A": 2.220866159528468,
-  "DPH_final_outward_projection_A": -0.8222417821997099,
-  "DPH_mean_protein_occluded_fraction": 0.6553004808292713,
-  "DPH_last_saved_SASA_protein_occluded_fraction": 0.6656531660833693,
+  "DPH_final_min_protein_A": 2.9824968119908832,
+  "DPH_final_centroid_displacement_A": 1.381360898443058,
+  "DPH_final_outward_projection_A": 0.1014397422365373,
+  "DPH_mean_protein_occluded_fraction": 0.6005717152618952,
+  "DPH_last_saved_SASA_protein_occluded_fraction": 0.623904304007953,
   "SASA_last_time_ps": 5500.0,
-  "DPH_mean_water_neighbors": 15.158,
-  "competitor_contact_fraction": 0.9962,
-  "competitor_final_min_protein_A": 2.948270505340832,
-  "DPH_competitor_contact_fraction": 0.946,
+  "DPH_mean_water_neighbors": 18.898,
+  "competitor_contact_fraction": 1.0,
+  "competitor_final_min_protein_A": 2.8421266606894706,
+  "DPH_competitor_contact_fraction": 0.9918,
   "scope": "Endpoint-conditional exploratory branch; inspect all repeats and control; no guaranteed replacement or closed-cavity classification",
   "sha256": {
-    "solute-trajectory.dcd": "87254b0f7706b72d6f20dcb4d95ae4b92e8aa098cb06fc38a33d302fadc31667",
-    "full-trajectory.dcd": "370d186bd4cb76d3ace3a27306f49b02bccbc9109af2814d55c747411f7fa356"
-  }
+    "solute-trajectory.dcd": "35028642833805ac35b474a67a947efddd600ed2c29a075ac835f992f0a263a4",
+    "full-trajectory.dcd": "47f1b23270d7c2d7268d0c274cf55088a145ed55a65d6eb26fac9a1468929bae"
+  },
+  "fatty_acid_CAS": "60-33-3",
+  "fatty_acid_stereo": "9Z,12Z",
+  "simultaneous_three_pair_contact_fraction": 0.9918,
+  "longest_simultaneous_contact_episode_ns": 1.566
 }

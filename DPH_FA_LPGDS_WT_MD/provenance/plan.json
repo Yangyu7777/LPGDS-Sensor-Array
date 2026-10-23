@@ -1,15 +1,25 @@
 {
   "source_run": "Selected_MD_20261018/01_PROTEIN_DPH_R3",
   "source_time_ps": 5502,
-  "design": "Three branches starting from exactly the same selected full-precision WT/DPH endpoint. Three velocity replicas per branch. Added ligands initially exterior, no artificial displacement force.",
+  "design": "Fresh batch of three prespecified independent-velocity cis,cis linoleate repeats; identical validated prepared inputs; all outcomes retained; no directed ternary formation or outcome-driven restarts.",
   "branches": {
-    "FA": "WT\u2013DPH plus one CAS506-21-8 E/E carboxylate"
+    "FA": "WT\u2013DPH plus one exterior (9Z,12Z)-linoleate carboxylate, CAS60-33-3"
   },
   "tasks": [
     {
       "mode": "FA",
+      "replica": 1,
+      "seed": 2026102211
+    },
+    {
+      "mode": "FA",
       "replica": 2,
-      "seed": 2026102102
+      "seed": 2026102212
+    },
+    {
+      "mode": "FA",
+      "replica": 3,
+      "seed": 2026102213
     }
   ],
   "production_ps_per_run": 5000,
@@ -30,9 +40,9 @@
       "DPH displacement/RMSD relative resident starting pose",
       "DPH SASA, water and DMSO neighborhoods",
       "competitor\u2013protein and competitor\u2013DPH proximity",
-      "headgroup versus chain contacts",
       "competitor proximity to original DPH occupied coordinates",
-      "DPH projection along initial exterior direction"
+      "DPH projection along initial exterior direction",
+      "Simultaneous three-pair heavy-atom contacts below 4.5 A, fraction and longest contiguous saved-frame episode; proximity is not affinity or closed-cavity binding."
     ],
     "interpretation": "Joint changes in competitor proximity and resident DPH position/exposure must be compared with controls and all repeats. No displacement claim from RMSD alone. No artificial-force trajectories will be labelled spontaneous. No calibrated Kd or binding-rate estimate."
   },
@@ -40,7 +50,16 @@
     "Source endpoint chosen post hoc; conditional mechanism test, not independent validation of selected pocket.",
     "Targeted exterior placement; millimolar local 1:1:1 models, not 8:1:10 experimental micromolar ratio.",
     "5ns per repeat is an initial exploratory window; no-event does not exclude competition at longer times.",
-    "PFOA/DMSO/phosphate transferable candidate parameters, not independently validated mixture or PFAS thermodynamics."
+    "Linoleate/DMSO/phosphate transferable candidate parameters; mixture thermodynamics and binding energetics not independently validated."
   ],
-  "resource_policy": "Serial GPU execution after existing PFOA_MD_20261020 queue finishes; do not interrupt or run concurrent GPU jobs."
+  "resource_policy": "Serial GPU execution after prior competition queue has released GPU; three predeclared cis-linoleate repeats; no concurrent GPU jobs.",
+  "chemical_identity": {
+    "acid_CAS": "60-33-3",
+    "acid_PubChem_CID": 5280450,
+    "stereochemistry": "9Z,12Z",
+    "simulated_form": "linoleate monoanion, charge -1",
+    "previous_incorrect_for_experiment_CAS": "506-21-8",
+    "previous_stereo": "9E,12E"
+  },
+  "control_reference": "DPH_R3_Competition_20261020/exports/CONTROL_R1,R2,R3 (same parent coordinates, solvent protocol and seeds; no new control trajectory required)"
 }

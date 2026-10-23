@@ -1,93 +1,58 @@
-# Molecular dynamics of C18:2 near a preformed WT L-PGDS–DPH configuration
+# Molecular dynamics of WT L-PGDS–DPH with cis,cis-linoleate
 
-This directory provides simulation inputs, complete restorable trajectories, analysis, English figures, and reproducibility scripts for **WT–DPH–C18:2**, a 5 ns atomistic molecular dynamics trajectory of one WT L-PGDS, one DPH, and one C18:2 carboxylate. The calculation began from the final coordinates of the [WT–DPH dataset](../DPH_LPGDS_WT_MD/), after addition of an exterior fatty acid. It is a newly equilibrated branch with reassigned velocities, not a seamless extension of the parent trajectory.
-
-The fatty acid is **(9E,12E)-octadeca-9,12-dienoate, CAS 506-21-8**, modeled as a monoanion (residue FAM). It is not the common cis,cis linoleate isomer. No PFAS molecule is present in this deposited system.
+This module now contains the selected trajectory from the new **9Z,12Z cis,cis-linoleate batch**, original run FA_R2, CAS **60-33-3**. It supersedes the previous E/E C18:2 deposit (CAS506-21-8), which did not match the experimentally purchased reagent. Previous contents remain recoverable through Git history; no trans trajectory is presented as cis data.
 
 ## Repository contents
 
-| Path | Description |
-| --- | --- |
-| `inputs/` | Prepared DPH/FAM structures, charge and parameter records, full-precision coordinates, and restorable solvated PDB/system XML |
-| `raw/` | Complete trajectories, topology, stage endpoints, checkpoint, thermodynamic records, and run status; oversized files require restoration |
-| `analysis/` | Geometry, RMSD/RMSF/Rg, contacts, SASA, hydration, summary data, and small contextual summaries of FA/control repeats |
-| `figures/` | Ten English figure sets in PNG (400 dpi), PDF, and SVG, without background grids |
-| `snapshots/` | Aligned coordinate snapshots and PyMOL settings |
-| `scripts/` | Analysis, plotting, optional numerical rerun, restoration, and verification utilities |
-| `methods/` | Detailed English protocol and concise SI methodology |
-| `provenance/` | FA-specific preparation record, selected task plan, and validation records |
-| `DATA_SHA256.csv` | Original-file byte sizes and SHA-256 hashes |
-| `LARGE_FILES.json`, `large_file_parts/` | Lossless gzip segment manifest and archived segments |
+|Path|Contents|
+|---|---|
+|inputs/|Actual prepared ligand/system, full-precision coordinates and force-field cache|
+|raw/|Complete original trajectories, states, topology, stage endpoints and thermodynamic records (restore large files first)|
+|analysis/|SASA, contacts, hydration, motion, RMSF, all three batch summaries and control context|
+|figures/|Full English figure sets and selected simplified orange panels|
+|snapshots/|Actual aligned structures, including explicitly selected contact illustration|
+|methods/|English and Chinese SI methods and English figure captions|
+|scripts/|Analysis, plotting, optional numerical rerun, restore and SHA256 verification|
+|provenance/|Chemical identity, starting geometry, replica/seed and selected-frame rule|
+
+## Selected manuscript panels
+
+![Structural evolution](figures/Selected_three_panels/01_Structural_evolution.png)
+
+![DPH SASA and hydration](figures/Selected_three_panels/02_DPH_exposure_and_hydration.png)
+
+![DPH–WT contacts within the ternary trajectory](figures/Selected_three_panels/03_DPH_WT_contact_heatmap.png)
+
+Molecular panels use orange DPH, blue linoleate, gray WT and red oxygen. SASA/occlusion panels use orange solid protein+linoleate and gray dashed protein-only calculations on **identical ternary-trajectory conformations**, not separate binary-control trajectories. Legends were omitted at the author's request; axis units remain. Heatmap: DPH–WT residue contacts with linoleate present, any heavy-atom periodic distance <4.5 Å, 50 ps bins. Other-run curves are not overlaid in the selected panels. Full analyses, including linoleate–WT contacts, remain available.
 
 ## Simulation overview
 
-| Parameter | Recorded setting |
-| --- | --- |
-| Model | One WT L-PGDS, one DPH, one C18:2 carboxylate |
-| Starting protein/DPH coordinates | Parent WT–DPH R3 endpoint, total parent time 5502 ps |
-| Initial fatty-acid placement | Exterior; minimum WT separation 6.097 Å, DPH separation 8.160 Å |
-| Force fields | Amber ff14SB; TIP3P; OpenFF Sage 2.2.1 small molecules with stored AM1-BCC charges |
-| Solvent | Water, nominal 5% v/v DMSO, phosphate and PBS-like ionic composition |
-| Software/backend | OpenMM 8.6.1, Apple M5 Pro OpenCL, single precision |
-| Production | 5 ns unrestrained NPT, 298.15 K, 1 bar, 1 fs timestep |
-| Prior preparation | 2 ps initialization test + 500 ps heating/equilibration |
-| Initial box | Cubic, 82.4514 Å per edge |
-| Sampling | Solute 1 ps; complete system 10 ps |
-| Analysis reference | Branch pre-MD coordinates, aligned on 170 protein core Cα atoms |
-| Seed | 2026102102 |
+One WT protein, one resident DPH and one cis-linoleate monoanion were simulated in explicit water/PBS-like ions/nominal 5% v/v DMSO. There were 55,362 atoms; Amber ff14SB/TIP3P/OpenFF Sage2.2.1 with independent AM1-BCC linoleate charges. OpenMM8.6.1, M5 Pro OpenCL single precision, 298.15K, 1bar, 1fs. Two ps safety plus500ps preparation preceded5ns unrestrained NPT; seed2026102212. The prepared WT/DPH coordinates were inherited unchanged from the selected WT–DPH endpoint. This is a local 1:1:1 millimolar model, not the experimental micromolar concentrations or8:1:10 ratio.
 
-The model contains 55,359 atoms. Its effective concentrations are millimolar and its stoichiometry is 1:1:1; it does not reproduce the experimental 8 μM protein, 1 μM DPH, and 10 μM fatty acid or the 8:1:10 molecular ratio. The solvent model and finite composition are documented in the [detailed protocol](methods/SI_protocol_EN.md).
+DPH–WT contact was100%; linoleate–WT100%; linoleate–DPH and simultaneous three-pair contact99.18%. Mean protein-only and protein+linoleate DPH SASA were211.09 and151.42Å²; nearby water oxygen count18.898. These are descriptive observations, not proof of enclosed-cavity residence, affinity or fluorescence enhancement. This representative was selected after inspection; R1/R3 summaries disclose the substantial repeat variation. Frames are correlated and are not independent experiments.
 
-## Structural analysis
-
-Across 5,000 production frames, DPH–WT, C18:2–WT, and DPH–C18:2 heavy-atom contacts (<4.5 Å) were observed in 100.00%, 99.62%, and 94.60% of frames, respectively. The mean occluded DPH SASA was 65.53% considering protein alone and 76.30% considering protein plus C18:2 at the same conformations. The latter difference describes additional geometric shielding by C18:2, not a measured change in fluorescence or affinity.
-
-![Pairwise proximity](figures/Fig01_pairwise_distances.png)
-
-![DPH surface exposure and hydration](figures/Fig05_DPH_exposure_and_hydration.png)
-
-![Residue contact heatmaps](figures/Fig07_residue_contact_heatmaps.png)
-
-Each heatmap cell shows the percentage of frames in a 50 ps bin in which any ligand heavy atom was within **4.5 Å** of any heavy atom of the indicated WT residue. The left panel is DPH–WT; the right panel is C18:2–WT. These are proximity contacts, not specifically hydrogen bonds. See [all figures](figures/) and [coordinate snapshots](figures/FigS02_coordinate_snapshots.png).
-
-This trajectory was selected after inspecting outcomes as a representative configuration of interest. The FA/control repeat summary in `analysis/FA_control_repeat_context.csv` preserves variation across the original three velocity repeats; it is not a deposit of the other raw trajectories. This selected 5 ns trajectory supports descriptive local contacts, not cooperative affinity, competition, enclosed-pocket residence, or fluorescence enhancement. The protein RMSD rises late in the trajectory; equilibrium convergence is not established. Production starts after preparation, when the fatty acid is already near DPH.
-
-## Restore and verify original data
+## Restore and reproduce
 
 ```bash
-cd DPH_FA_LPGDS_WT_MD
 python3 scripts/restore_data.py
 python3 scripts/verify_data.py
 ```
 
-The complete solvent/solute trajectories and XML/state files are losslessly gzip-segmented, with no archival frame removal. Restoration checks segment and original-file SHA-256 hashes. Python's standard library is sufficient for restoration.
-
-## Analysis and computational reproducibility
-
-After restoring data and installing the recorded scientific dependencies:
+Large scientific files are stored in lossless gzip parts. No trajectory frames were removed. DATA_SHA256.csv checks restored original bytes.
 
 ```bash
 python scripts/analyze_ternary.py
 python scripts/plot_ternary.py
+python scripts/prepare_contact_views.py
+python scripts/verify_stereochemistry.py
+# In a Python environment containing PyMOL/pymol2:
+python scripts/render_pymol.py
+python scripts/finish_presentation.py
+python scripts/plot_selected_panels.py
 ```
 
-The first command recalculates distance/contact/SASA/solvent analysis from the complete raw trajectories; the second generates the ten displayed figure sets and supplemental motion metrics. They overwrite derived analysis and figures, not raw trajectories. The analysis command also leaves four basic exporter plots in `analysis/`. The small contextual repeat table is archived evidence and is not reconstructed from this trajectory alone. See `scripts/requirements-analysis.txt` and the detailed protocol.
+The full plotting routines use the original blue-DPH/orange-linoleate palette; plot_selected_panels.py produces the requested orange-DPH simplified panels. These change derived outputs, not raw data. Optional numerical rerun: `python scripts/run_ternary.py smoke` then `production`, using OpenCL/RDKit; outputs go to reproduced_ternary/ and existing output is protected. Numerical reruns need not be bitwise identical.
 
-Optional MD rerun from the deposited prepared system (OpenCL and RDKit required):
+[English SI methods](methods/SI_methods_EN.md) | [中文方法](methods/SI_methods_CN.md) | [English figure captions](methods/Figure_captions_EN.md) | [中文解读](结果解读_CN.md)
 
-```bash
-python scripts/run_ternary.py smoke
-python scripts/run_ternary.py production
-```
-
-The runner writes only to `reproduced_ternary/` and refuses an existing smoke-run directory or an already started production phase. Numerical trajectories need not be bitwise identical across platforms. The restored `inputs/system.xml` and `raw/running-system.xml` are the authoritative parameter records.
-
-## Documentation
-
-Figures and main documentation use the chemical-system name WT–DPH–C18:2. Original run identifiers remain in raw metadata and `provenance/display_naming.json` for traceability.
-
-- [Detailed English simulation protocol](methods/SI_protocol_EN.md)
-- [Supporting Information methodology](methods/SI_methods_EN.md)
-- [English figure captions](methods/Figure_captions_EN.md)
-
-Protein structural accession and original parent ligand-placement metadata remain incomplete and must be checked against primary preparation records before submission. The parent module is referenced without changing its contents.
+Original protein accession and original parent DPH-placement metadata require confirmation from primary preparation records; they are not inferred here. The original binary WT–DPH module remains separate and unchanged.

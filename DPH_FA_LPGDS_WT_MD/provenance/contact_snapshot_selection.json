@@ -1,0 +1,15 @@
+{
+  "selection_rule": "Midpoint saved frame of the longest contiguous episode where all three pairwise minimum heavy-atom distances are <4.5 A. This is a selected contact illustration, not an independently representative equilibrium state.",
+  "selected_total_time_ps": 4392,
+  "selected_production_time_ns": 3.89,
+  "episode_start_production_ns": 3.108,
+  "episode_last_production_ns": 4.673,
+  "episode_saved_frames": 1566,
+  "episode_estimated_duration_ns": 1.566,
+  "snapshot": "aligned_representative_contact_4392ps.pdb",
+  "min_distances_A": {
+    "DPH_protein_min_heavy_A": 3.1117938391305544,
+    "competitor_protein_min_heavy_A": 2.8191022248553046,
+    "DPH_competitor_min_heavy_A": 3.393281043041518
+  }
+}

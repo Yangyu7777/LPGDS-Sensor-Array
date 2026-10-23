@@ -1,8 +1,0 @@
-{
-  "display_name": "WT\u2013DPH\u2013C18:2",
-  "original_run_id": "FA_R2",
-  "replica": 2,
-  "reason": "Use chemical system names in presentation instead of run indices.",
-  "disclosure": "This is a post hoc selected representative trajectory from three velocity repeats; the repeat context and original raw metadata are retained.",
-  "raw_data_unchanged": true
-}

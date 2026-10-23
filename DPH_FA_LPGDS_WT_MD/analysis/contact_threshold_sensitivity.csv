@@ -1,0 +1,5 @@
+cutoff_A,DPH_WT_fraction,FA_WT_fraction,DPH_FA_fraction,all_three_fraction
+3.5,0.9528,0.983,0.319,0.3002
+4.0,1.0,1.0,0.9192,0.9192
+4.5,1.0,1.0,0.9918,0.9918
+5.0,1.0,1.0,0.9978,0.9978

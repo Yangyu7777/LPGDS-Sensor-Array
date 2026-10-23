@@ -8,10 +8,10 @@ from rdkit.Chem import rdMolTransforms
 from openmm import app,unit,XmlSerializer,Platform,LangevinMiddleIntegrator,CustomExternalForce,MonteCarloBarostat
 root=Path(__file__).resolve().parents[1];mode='FA';phase=sys.argv[1];replica=2
 if phase not in ['smoke','production']:raise ValueError('Use smoke or production')
-name='FA_R2';source=root/'inputs';out=root/'reproduced_ternary';statuspath=out/'status.json';seed=2026102102;ligand_name='DPH'
+name='FA_R2';source=root/'inputs';out=root/'reproduced_ternary';statuspath=out/'status.json';seed=2026102212;ligand_name='DPH'
 if phase=='smoke':
  if out.exists():raise RuntimeError('Output exists; refusing duplicate smoke run')
- out.mkdir();status={'status':'starting','mode':mode,'replica':replica,'independent_velocity_repeat':True,'source_endpoint':'Selected_MD_20261018/01_PROTEIN_DPH_R3, total5502ps','comparison':'Resident DPH; exterior competitor or matched control; no pushing force','pid':os.getpid(),'stage':'minimization','completed_stages':[],'planned_production_ps':5000,'planned_equilibration_ps':500,'short_test_ps':2,'timestep_fs':1,'random_seed':seed,'full_save_interval_ps':10,'solute_save_interval_ps':1,'limitations':'Independent velocity replica conditional on a fixed locally chosen start; no affinity or guaranteed binding; no experimental concentration match; provisional solvent model'}
+ out.mkdir();status={'status':'starting','mode':mode,'replica':replica,'independent_velocity_repeat':True,'source_endpoint':'Selected_MD_20261018/01_PROTEIN_DPH_R3, total5502ps','comparison':'WT–DPH plus exterior (9Z,12Z)-linoleate, CAS60-33-3; no pushing force','fatty_acid_CAS':'60-33-3','fatty_acid_stereo':'9Z,12Z','pid':os.getpid(),'stage':'minimization','completed_stages':[],'planned_production_ps':5000,'planned_equilibration_ps':500,'short_test_ps':2,'timestep_fs':1,'random_seed':seed,'full_save_interval_ps':10,'solute_save_interval_ps':1,'limitations':'Independent velocity replica conditional on a fixed locally chosen start; no affinity or guaranteed binding; no experimental concentration match; provisional solvent model'}
 else:
  status=json.loads(statuspath.read_text())
  if status['status']!='ready_for_production':raise RuntimeError('Safety stage not ready or production already launched')
@@ -47,15 +47,15 @@ try:
   for b in mol.GetBonds():
    if b.GetBondType()!=Chem.BondType.DOUBLE or b.IsInRing() or b.GetBeginAtom().GetAtomicNum()!=6 or b.GetEndAtom().GetAtomicNum()!=6:continue
    i,j=b.GetBeginAtomIdx(),b.GetEndAtomIdx();aa=next(z.GetIdx() for z in mol.GetAtomWithIdx(i).GetNeighbors() if z.GetIdx()!=j and z.GetAtomicNum()!=1);bb=next(z.GetIdx() for z in mol.GetAtomWithIdx(j).GetNeighbors() if z.GetIdx()!=i and z.GetAtomicNum()!=1);ts.append((aa,i,j,bb))
-  torsions[n]=ts
+  torsions[n]=[(t, abs(rdMolTransforms.GetDihedralDeg(mol.GetConformer(),*t))>=90) for t in ts]
  def check():
   st=sim.context.getState(getPositions=True,getEnergy=True);x=np.asarray(st.getPositions().value_in_unit(unit.angstrom));energy=st.getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole)
   if not np.isfinite(x).all() or not np.isfinite(energy):raise RuntimeError('Non-finite state')
   angles={}
   for n,mol in mols.items():
    for i,j in enumerate(mapping[n]):mol.GetConformer().SetAtomPosition(i,x[j])
-   angles[n]=[rdMolTransforms.GetDihedralDeg(mol.GetConformer(),*t) for t in torsions[n]]
-   if any(abs(z)<90 for z in angles[n]):raise RuntimeError(f'{n} E/Z geometry changed: {angles[n]}')
+   angles[n]=[rdMolTransforms.GetDihedralDeg(mol.GetConformer(),*t) for t,is_trans in torsions[n]]
+   if any((abs(z)>=90)!=expected for z,(t,expected) in zip(angles[n],torsions[n])):raise RuntimeError(f'{n} E/Z geometry changed: {angles[n]}')
   box=np.diag(np.asarray(st.getPeriodicBoxVectors().value_in_unit(unit.angstrom)));tree=cKDTree(x[partner]%box,boxsize=box);gap=float(tree.query(x[fa]%box)[0].min())
   status.update(step=sim.currentStep,time_ps=float(st.getTime().value_in_unit(unit.picosecond)),min_ligand_partner_heavy_A=gap,small_molecule_dihedrals_deg=angles,potential_energy_kj_mol=energy,restraint_k=sim.context.getParameter('k'));sim.saveCheckpoint(str(out/'latest.chk'));sim.saveState(str(out/'latest-state.xml'));save()
  if phase=='smoke':

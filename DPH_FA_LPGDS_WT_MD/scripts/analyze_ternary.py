@@ -5,7 +5,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 from openmm import app,unit
 from md_analysis_utils import read_dcd,kabsch
-root=Path(__file__).resolve().parents[1];mode='FA';rep=2;name='WT–DPH–C18:2';raw=root/'raw';out=root/'analysis';out.mkdir(exist_ok=True);source=root/'inputs'
+root=Path(__file__).resolve().parents[1];mode='FA';rep=2;name='FA_R2';raw=root/'raw';out=root/'analysis';out.mkdir(exist_ok=True);source=root/'inputs'
 assert json.loads((raw/'status.json').read_text())['status']=='complete'
 p=app.PDBFile(str(raw/'solute-topology.pdb'));at=list(p.topology.atoms());xyz,boxes=read_dcd(raw/'solute-trajectory.dcd');time=np.arange(3,5503);assert len(xyz)==len(time);prod=time>502
 ip=app.PDBFile(str(source/'solvated.pdb'));ia=list(ip.topology.atoms());keep=[a.index for a in ia if a.residue.name not in {'HOH','DMS','PH1','PH2','NA','K','CL'}];ref=np.load(source/'coordinates_nm.npy')[keep]*10
@@ -52,6 +52,12 @@ for t,f in snap.items():
 # Descriptive numerical results; no binding, displacement or cavity classification from one metric.
 last=time>4502;j={'run':name,'branch':mode,'replica':rep,'production_frames':5000,'production_ns':5,'DPH_contact_fraction':float((v[prod,2]<4.5).mean()),'DPH_last_1ns_contact_fraction':float((v[last,2]<4.5).mean()),'DPH_final_min_protein_A':float(v[-1,2]),'DPH_final_centroid_displacement_A':float(v[-1,5]),'DPH_final_outward_projection_A':float(v[-1,6]),'DPH_mean_protein_occluded_fraction':float(ss[:,5].mean()),'DPH_last_saved_SASA_protein_occluded_fraction':float(ss[-1,5]),'SASA_last_time_ps':float(ss[-1,0]),'DPH_mean_water_neighbors':float(sol[:,2].mean()),'competitor_contact_fraction':float((v[prod,8]<4.5).mean()) if len(comp) else None,'competitor_final_min_protein_A':float(v[-1,8]) if len(comp) else None,'DPH_competitor_contact_fraction':float((v[prod,9]<4.5).mean()) if len(comp) else None,'scope':'Endpoint-conditional exploratory branch; inspect all repeats and control; no guaranteed replacement or closed-cavity classification','sha256':{n:hashlib.sha256((raw/n).read_bytes()).hexdigest() for n in ['solute-trajectory.dcd','full-trajectory.dcd']}}
 (out/'summary.json').write_text(json.dumps(j,indent=2)+'\n')
+joint=(v[prod,2]<4.5)&(v[prod,8]<4.5)&(v[prod,9]<4.5)
+longest=cur=0
+for hit in joint:
+ cur=cur+1 if hit else 0;longest=max(longest,cur)
+j.update(fatty_acid_CAS='60-33-3',fatty_acid_stereo='9Z,12Z',simultaneous_three_pair_contact_fraction=float(joint.mean()),longest_simultaneous_contact_episode_ns=longest/1000)
+(out/'summary.json').write_text(json.dumps(j,indent=2)+'\n')
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -62,13 +68,13 @@ def save(fig,name):
  plt.close(fig)
 fig,axes=plt.subplots(3,1,figsize=(7.2,7.8),layout='constrained');axes[0].plot(t,v[prod,2],color=col);axes[0].axhline(4.5,color='gray',ls='--');axes[0].set_ylabel('DPH–protein min distance (Å)');axes[1].plot(t,v[prod,5],color=col,label='Centroid displacement');axes[1].plot(t,v[prod,6],color='gray',ls='--',label='Outward projection');axes[1].set_ylabel('DPH movement (Å)');axes[1].legend(frameon=False);axes[2].plot(t,v[prod,4],color=col,label='DPH, protein aligned');axes[2].plot(t,v[prod,7],color='gray',label='Protein core Cα');axes[2].set_ylabel('RMSD from source endpoint (Å)');axes[2].legend(frameon=False)
 for a in axes:a.set(xlabel='Production time (ns)',xlim=(0,5));a.grid(False)
-fig.suptitle(name+' | Resident DPH behavior');save(fig,'01_DPH_position_and_contacts')
+fig.suptitle('WT–DPH–(9Z,12Z)-C18:2 '+str(rep)+' | Resident DPH behavior');save(fig,'01_DPH_position_and_contacts')
 fig,axes=plt.subplots(3,1,figsize=(7.2,7.8),layout='constrained');axes[0].plot(ss[:,1],ss[:,3],color=col,label='Protein occlusion only');axes[0].plot(ss[:,1],ss[:,4],color='gray',ls='--',label='Protein + competitor');axes[0].set_ylabel('DPH SASA (Å²)');axes[0].legend(frameon=False);axes[1].plot(ss[:,1],ss[:,5]*100,color=col);axes[1].set(ylabel='Protein-occluded DPH SASA (%)',ylim=(0,100));axes[2].plot(sol[:,1],sol[:,2],color=col);axes[2].set_ylabel('Water O within 5 Å of DPH')
 for a in axes:a.set(xlabel='Production time (ns)',xlim=(0,5));a.grid(False)
-fig.suptitle(name+' | Resident DPH exposure');save(fig,'02_DPH_exposure_and_water')
+fig.suptitle('WT–DPH–(9Z,12Z)-C18:2 '+str(rep)+' | Resident DPH exposure');save(fig,'02_DPH_exposure_and_water')
 if len(comp):
  fig,axes=plt.subplots(3,1,figsize=(7.2,7.8),layout='constrained')
  for ax,y,label in [(axes[0],8,'Competitor–protein min distance (Å)'),(axes[1],9,'Competitor–DPH min distance (Å)'),(axes[2],10,'Competitor–initial DPH region (Å)')]:ax.plot(t,v[prod,y],color=col);ax.set(xlabel='Production time (ns)',ylabel=label,xlim=(0,5));ax.grid(False)
- fig.suptitle(name+' | Competitor approach (distance proxies)');save(fig,'03_competitor_approach')
-fig,ax=plt.subplots(figsize=(8,3.8),layout='constrained');ax.plot(range(1,len(rf)+1),rf,color=col);ax.set(xlabel='Input residue number (His6 retained)',ylabel='Cα RMSF (Å)',title=name);save(fig,'04_protein_RMSF')
+ fig.suptitle('WT–DPH–(9Z,12Z)-C18:2 '+str(rep)+' | Competitor approach (distance proxies)');save(fig,'03_competitor_approach')
+fig,ax=plt.subplots(figsize=(8,3.8),layout='constrained');ax.plot(range(1,len(rf)+1),rf,color=col);ax.set(xlabel='Input residue number (His6 retained)',ylabel='Cα RMSF (Å)',title='WT–DPH–(9Z,12Z)-C18:2 | Repeat '+str(rep));save(fig,'04_protein_RMSF')
 print(json.dumps(j,indent=2))

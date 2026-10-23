@@ -1,0 +1,26 @@
+{
+  "camera": [
+    -0.2501063346862793,
+    0.9566822052001953,
+    -0.14901742339134216,
+    0.11592152714729309,
+    0.18238940834999084,
+    0.9763689041137695,
+    0.9612538814544678,
+    0.2269216924905777,
+    -0.15651682019233704,
+    0.0,
+    0.0,
+    -205.1978302001953,
+    34.483089447021484,
+    40.354034423828125,
+    40.55666732788086,
+    161.779541015625,
+    248.61611938476562,
+    20.0
+  ],
+  "same_camera_all_frames": true,
+  "protein_render": "cartoon; His6 residues171-176 hidden only for visualization",
+  "ligands": "actual heavy-atom sticks; DPH blue, cis-linoleate orange with red oxygen",
+  "artificial_ligand_or_protein_movement": false
+}

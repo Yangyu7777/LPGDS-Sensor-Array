@@ -11,7 +11,7 @@ This repository contains reproducible Python workflows for six engineered L-PGDS
 | [Fatty_acids](Fatty_acids/) | Fatty-acid chain lengths, unsaturation, concentration gradients and mixtures | LDA, response profiles, training and held-out predictions |
 | [PFAS](PFAS/) | PFOA, PFNA, PFDA, PFHxS, PFOS; PFOA/PFOS mixtures and concentration gradients | LDA, response profiles, held-out confusion matrices |
 | [DPH_LPGDS_WT_MD](DPH_LPGDS_WT_MD/) | DPH and wild-type L-PGDS | WT–DPH MD simulation data, figures, restorable raw trajectories, and English SI methods |
-| [DPH_FA_LPGDS_WT_MD](DPH_FA_LPGDS_WT_MD/) | C18:2 added near WT–DPH | WT–DPH–C18:2 MD data, English figures, restorable raw trajectories, and English SI methods |
+| [DPH_FA_LPGDS_WT_MD](DPH_FA_LPGDS_WT_MD/) | cis,cis-C18:2 (CAS60-33-3) near WT–DPH | WT–DPH–C18:2 MD data, English figures, restorable raw trajectories, and English SI methods |
 
 ## Reproduce
 
@@ -52,3 +52,6 @@ The [MD module](DPH_LPGDS_WT_MD/) documents one WT–DPH molecular dynamics traj
 ## C18:2 near WT–DPH molecular dynamics
 
 The [WT–DPH–C18:2 MD module](DPH_FA_LPGDS_WT_MD/) documents C18:2 behavior after addition near the selected WT–DPH endpoint, including complete restorable trajectories, analysis, English figures and [SI methodology](DPH_FA_LPGDS_WT_MD/methods/SI_methods_EN.md). This selected 5 ns trajectory describes local contacts and geometric shielding; it does not establish cooperative affinity, enclosed-pocket residence or a fluorescence response.
+
+
+The C18:2 MD module has been updated to the experimentally used **9Z,12Z linoleate (CAS60-33-3)**. It replaces the earlier E/E-isomer data (CAS506-21-8); prior versions remain in Git history. The current selected trajectory and all available same-batch repeat summaries are identified in the module.

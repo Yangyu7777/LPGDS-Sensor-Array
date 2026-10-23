@@ -4,8 +4,10 @@
   "replica": 2,
   "independent_velocity_repeat": true,
   "source_endpoint": "Selected_MD_20261018/01_PROTEIN_DPH_R3, total5502ps",
-  "comparison": "Resident DPH; exterior competitor or matched control; no pushing force",
-  "pid": 54530,
+  "comparison": "WT\u2013DPH plus exterior (9Z,12Z)-linoleate, CAS60-33-3; no pushing force",
+  "fatty_acid_CAS": "60-33-3",
+  "fatty_acid_stereo": "9Z,12Z",
+  "pid": 9236,
   "stage": "production_pilot",
   "completed_stages": [
     "heating",
@@ -19,7 +21,7 @@
   "planned_equilibration_ps": 500,
   "short_test_ps": 2,
   "timestep_fs": 1,
-  "random_seed": 2026102102,
+  "random_seed": 2026102212,
   "full_save_interval_ps": 10,
   "solute_save_interval_ps": 1,
   "limitations": "Independent velocity replica conditional on a fixed locally chosen start; no affinity or guaranteed binding; no experimental concentration match; provisional solvent model",
@@ -27,28 +29,28 @@
   "precision": "single",
   "step": 5502000,
   "time_ps": 5502.000000662155,
-  "min_ligand_partner_heavy_A": 3.2901056274642633,
+  "min_ligand_partner_heavy_A": 2.982498513127726,
   "small_molecule_dihedrals_deg": {
     "DPH": [
-      -177.51532073166197,
-      178.02412435256267,
-      176.26501282385343
+      -175.7440897051962,
+      170.19666218796323,
+      -177.6658514610582
     ],
     "FAM": [
-      171.12701264940233,
-      -172.57967374039023
+      6.603140020939691,
+      0.30967500952260407
     ]
   },
-  "potential_energy_kj_mol": -771013.7580759684,
+  "potential_energy_kj_mol": -769087.7395645822,
   "restraint_k": 0.0,
   "short_test_passed": true,
   "minimization_passed": true,
   "stage_duration_ps": 5000,
   "preproduction_screen": {
-    "mean_temperature_K": 298.4285247691487,
-    "mean_density_g_ml": 1.0129040546612307,
-    "density_range_g_ml": 0.007727137060657974
+    "mean_temperature_K": 298.12850333373973,
+    "mean_density_g_ml": 1.0131022174743156,
+    "density_range_g_ml": 0.0073780607452276215
   },
-  "elapsed_seconds": 9935.543006833002,
+  "elapsed_seconds": 9596.204417790985,
   "production_completed_ps": 5000
 }

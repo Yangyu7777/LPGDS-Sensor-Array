@@ -1,61 +1,81 @@
+# Figure definitions
+
 # Figure captions
 
-## Fig01_pairwise_distances: Pairwise proximity
+## Fig01_pairwise_distances
 
-Minimum periodic heavy-atom distances for DPH–WT, C18:2–WT and DPH–C18:2 during production. Dashed lines indicate the 4.5 Å contact cutoff.
+Minimum periodic heavy-atom distances for DPH–WT, cis-linoleate–WT and DPH–cis-linoleate. Dashed lines show the 4.5 Å proximity cutoff. Production begins after preparation.
 
-![Pairwise proximity](../figures/Fig01_pairwise_distances.png)
+![Fig01_pairwise_distances](../figures/Fig01_pairwise_distances.png)
 
-## Fig02_protein_RMSD_and_Rg: Protein stability
+## Fig02_protein_RMSD_and_Rg
 
-Core Cα RMSD relative to the branch initial coordinates and mass-weighted protein heavy-atom radius of gyration. Late changes do not establish convergence.
+Core Cα RMSD relative to branch pre-MD coordinates and mass-weighted protein heavy-atom radius of gyration.
 
-![Protein stability](../figures/Fig02_protein_RMSD_and_Rg.png)
+![Fig02_protein_RMSD_and_Rg](../figures/Fig02_protein_RMSD_and_Rg.png)
 
-## Fig03_protein_RMSF: Protein flexibility
+## Fig03_protein_RMSF
 
-Cα RMSF after core fitting, relative to the production mean. The shaded region marks the retained His6 tag.
+Protein Cα RMSF after core fitting, relative to the production mean; His6 is shaded.
 
-![Protein flexibility](../figures/Fig03_protein_RMSF.png)
+![Fig03_protein_RMSF](../figures/Fig03_protein_RMSF.png)
 
-## Fig04_ligand_motion: Ligand motion
+## Fig04_ligand_motion
 
-DPH and C18:2 protein-fitted RMSD, self-fitted RMSD, and centroid displacement, referenced to branch pre-MD coordinates.
+Protein-aligned RMSD, ligand-self-aligned RMSD and centroid displacement for DPH and cis-linoleate, relative to branch pre-MD coordinates.
 
-![Ligand motion](../figures/Fig04_ligand_motion.png)
+![Fig04_ligand_motion](../figures/Fig04_ligand_motion.png)
 
-## Fig05_DPH_exposure_and_hydration: DPH surface exposure and hydration
+## Fig05_DPH_exposure_and_hydration
 
-SASA of identical DPH conformations alone, with WT occlusion and with WT+C18:2 occlusion; occluded fractions and water oxygen neighbor counts. SASA and water sampling intervals were 50 and 10 ps, respectively.
+DPH SASA at identical conformations alone, with WT occlusion, and with WT+cis-linoleate occlusion; occluded fractions and water oxygen neighbor counts. SASA and solvent intervals are 50 and 10 ps.
 
-![DPH surface exposure and hydration](../figures/Fig05_DPH_exposure_and_hydration.png)
+![Fig05_DPH_exposure_and_hydration](../figures/Fig05_DPH_exposure_and_hydration.png)
 
-## Fig06_contacts_and_DMSO: Contact extent and DMSO neighbors
+## Fig06_contacts_and_DMSO
 
-Number of WT residues contacting each ligand and distinct DMSO neighbors within 4.5 Å of DPH.
+WT contacting-residue counts for each ligand and distinct DMSO neighbors within 4.5 Å of DPH.
 
-![Contact extent and DMSO neighbors](../figures/Fig06_contacts_and_DMSO.png)
+![Fig06_contacts_and_DMSO](../figures/Fig06_contacts_and_DMSO.png)
 
-## Fig07_residue_contact_heatmaps: Residue-contact heatmaps
+## Fig07_residue_contact_heatmaps
 
-Top 12 WT residues by DPH or C18:2 contact occupancy. Each cell is the percentage of 50 saved frames within a 50 ps window with any ligand–residue heavy-atom distance <4.5 Å. Contacts are not specifically hydrogen bonds.
+Top 12 residues per ligand. Contact is any ligand/residue heavy-atom periodic distance <4.5 Å; each pixel is occupancy across 50 frames (50 ps). Both panels come from the same ternary trajectory, not separate binary controls. Left: DPH–WT with linoleate present. Right: cis-linoleate–WT with DPH present. Not specifically hydrogen bonds.
 
-![Residue-contact heatmaps](../figures/Fig07_residue_contact_heatmaps.png)
+![Fig07_residue_contact_heatmaps](../figures/Fig07_residue_contact_heatmaps.png)
 
-## Fig08_residue_contact_occupancy: Residue contact occupancy
+## Fig08_residue_contact_occupancy
 
-Top 12 residue-contact fractions over all 5000 production frames for each ligand. Percentages reflect correlated frames, not independent experimental binding measurements.
+Residue proximity-contact fractions across all 5000 temporally correlated production frames.
 
-![Residue contact occupancy](../figures/Fig08_residue_contact_occupancy.png)
+![Fig08_residue_contact_occupancy](../figures/Fig08_residue_contact_occupancy.png)
 
-## FigS01_temperature_and_density: Production quality-control traces
+## Fig09_simultaneous_three_pair_contacts
 
-Temperature and density during production; the temperature reference is 298.15 K. These checks do not demonstrate equilibrium convergence.
+Pairwise contact occupancies in 50 ps bins and the same-frame three-pair contact indicator at <4.5 Å. The vertical line marks the explicitly selected illustration.
 
-![Production quality-control traces](../figures/FigS01_temperature_and_density.png)
+![Fig09_simultaneous_three_pair_contacts](../figures/Fig09_simultaneous_three_pair_contacts.png)
 
-## FigS02_coordinate_snapshots: Aligned structural snapshots
+## Fig10_selected_contact_structure
 
-Branch pre-MD, production 0, 2.5 and 5 ns coordinates, with a common protein fit, view and scale. WT is a gray Cα trace, DPH blue and C18:2 orange. No cavity surface is rendered; projection overlap is not evidence of enclosed-cavity residence.
+Selected production 3.890 ns contact illustration, chosen as the midpoint of the longest contiguous strict three-pair contact episode. Gray WT, blue DPH, orange cis-linoleate with red oxygen; close-up uses a different zoom and semi-transparent protein. Actual coordinates; no manual atomic movement. This illustration is not an enclosed-pocket classification.
 
-![Aligned structural snapshots](../figures/FigS02_coordinate_snapshots.png)
+![Fig10_selected_contact_structure](../figures/Fig10_selected_contact_structure.png)
+
+## FigS01_temperature_and_density
+
+Production temperature and density. These are basic quality-control checks, not convergence tests.
+
+![FigS01_temperature_and_density](../figures/FigS01_temperature_and_density.png)
+
+## FigS02_coordinate_snapshots
+
+Aligned Cα-trace snapshots before preparation, and at production 0, 2.5 and 5 ns, with a common view and scale.
+
+![FigS02_coordinate_snapshots](../figures/FigS02_coordinate_snapshots.png)
+
+## FigS03_molecular_snapshots
+
+Ray-traced molecular snapshots at the same four times using a fixed camera: WT cartoon gray, DPH blue, cis-linoleate orange/red. His6 is retained in MD but omitted from the rendering. Raster molecular pictures are embedded in PDF/SVG; quantitative plots remain vector.
+
+![FigS03_molecular_snapshots](../figures/FigS03_molecular_snapshots.png)

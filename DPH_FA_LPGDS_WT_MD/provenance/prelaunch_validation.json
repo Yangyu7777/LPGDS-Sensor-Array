@@ -1,0 +1,9 @@
+{
+  "isomer_9Z_12Z": true,
+  "FAM_charge_e": -1.0000000000000009,
+  "total_atoms": 55362,
+  "virtual_sites": 0,
+  "timestep_fs": 1,
+  "three_predeclared_replicates": true,
+  "parent_WT_DPH_coordinates_exact": true
+}
