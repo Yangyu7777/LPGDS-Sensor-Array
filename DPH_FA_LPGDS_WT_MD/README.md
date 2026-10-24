@@ -2,6 +2,13 @@
 
 This module now contains the selected trajectory from the new **9Z,12Z cis,cis-linoleate batch**, original run FA_R2, CAS **60-33-3**. It supersedes the previous E/E C18:2 deposit (CAS506-21-8), which did not match the experimentally purchased reagent. Previous contents remain recoverable through Git history; no trans trajectory is presented as cis data.
 
+## File guide
+
+- **inputs / raw / large_file_parts:** system setup, original trajectories and lossless archives.
+- **analysis:** quantitative SASA, hydration, residue contacts, structural motion and repeat summaries.
+- **figures / snapshots:** complete plots, selected manuscript panels and molecular structures.
+- **methods / provenance / scripts:** SI documentation, simulation traceability and reproducible analysis.
+
 ## Repository contents
 
 |Path|Contents|
