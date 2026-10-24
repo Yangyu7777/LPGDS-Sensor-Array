@@ -1,57 +1,36 @@
-# LPGDS sensor array
+# L-PGDS–DPH Sensor Array
 
-**Engineered L-PGDS–DPH fluorescence sensor arrays for fatty acids and PFAS**
+Computationally engineered L-PGDS receptor arrays for fluorescence fingerprinting of fatty acids (FAs) and per- and polyfluoroalkyl substances (PFAS).
 
-This repository contains reproducible Python workflows for six engineered L-PGDS receptor channels: WT, LA, LB, LC, LD, and LE.
+## Repository contents
 
-## Research modules
+| Folder | Contents |
+| --- | --- |
+| [Fatty_acids/](Fatty_acids/) | FA chain-length, unsaturation, concentration, and binary-mixture analyses; fluorescence profiles, LDA and held-out classification |
+| [PFAS/](PFAS/) | PFOA, PFNA, PFDA, PFHxS and PFOS analyses; concentration series, PFOA/PFOS mixtures, LDA and confusion matrices |
+| [DPH_LPGDS_WT_MD/](DPH_LPGDS_WT_MD/) | WT L-PGDS–DPH simulation, trajectory archives, structural analysis, figures and SI methods |
+| [DPH_FA_LPGDS_WT_MD/](DPH_FA_LPGDS_WT_MD/) | WT L-PGDS–DPH–C18:2 simulation, restored trajectories, shielding/hydration/contact analyses, figures and SI methods |
 
-| Directory | Analytes | Workflow |
-| --- | --- | --- |
-| [Fatty_acids](Fatty_acids/) | Fatty-acid chain lengths, unsaturation, concentration gradients and mixtures | LDA, response profiles, training and held-out predictions |
-| [PFAS](PFAS/) | PFOA, PFNA, PFDA, PFHxS, PFOS; PFOA/PFOS mixtures and concentration gradients | LDA, response profiles, held-out confusion matrices |
-| [DPH_LPGDS_WT_MD](DPH_LPGDS_WT_MD/) | DPH and wild-type L-PGDS | WT–DPH MD simulation data, figures, restorable raw trajectories, and English SI methods |
-| [DPH_FA_LPGDS_WT_MD](DPH_FA_LPGDS_WT_MD/) | cis,cis-C18:2 (CAS60-33-3) near WT–DPH | WT–DPH–C18:2 MD data, English figures, restorable raw trajectories, and English SI methods |
+## Data analysis
 
-## Reproduce
+All sensing analyses use six channels (WT, LA, LB, LC, LD and LE). Each analyte condition has ten measurements, split into six training and four held-out samples. Standardization and linear discriminant analysis (LDA) are fitted using training data only. The 95% ellipses summarize training-score distributions; single-split test accuracy is not external validation.
 
-Fatty acids:
+### Reproduce the analysis
 
 ```bash
 pip install -r Fatty_acids/requirements.txt
 python Fatty_acids/analysis_pipeline.py --input fatty_acids.xlsx --output-dir Fatty_acids/analysis_output --seed 20260921
-```
 
-PFAS:
-
-```bash
 pip install -r PFAS/requirements.txt
 python PFAS/analyze_pfas.py --input pfas.xlsx --output PFAS/results --seed 20261017
 ```
 
-Use the actual cleaned workbooks as inputs; these are not part of this code repository. For sheet names and workflow details, consult each module's README.
+Supply the cleaned experimental workbooks separately; they are not included in this repository. See the README in each analysis folder for required sheets and outputs. Check experimental summary sheets to establish whether plotted error bars denote SD or SEM.
 
-## Shared analysis principles
+## Molecular dynamics
 
-- Six fluorescence-response channels: WT, LA, LB, LC, LD and LE.
-- Ten replicates per analyte class, with six randomly assigned to training and four held out for prediction.
-- Standardization and LDA are fitted on training observations only.
-- The 95% ellipses are descriptive covariance regions for the training scores.
-- Classification accuracy from a single split does not constitute independent external validation.
-- Bar-chart errors come from the supplied experimental summary sheets; confirm whether their uncertainties are SD or SEM.
+**WT–DPH:** The [binary-system module](DPH_LPGDS_WT_MD/) contains one simulation trajectory, analysis files and [English SI methods](DPH_LPGDS_WT_MD/methods/SI_methods_EN.md). Restore compressed trajectory parts using `python3 DPH_LPGDS_WT_MD/scripts/restore_data.py` and verify checksums using `python3 DPH_LPGDS_WT_MD/scripts/verify_data.py`.
 
-## Scope
+**WT–DPH–C18:2:** The [ternary-system module](DPH_FA_LPGDS_WT_MD/) uses **9Z,12Z-linoleate (CAS 60-33-3)**, replacing the earlier E/E isomer (CAS 506-21-8). It contains the selected 5 ns trajectory, available same-batch repeat summaries, contact/hydration/shielding analyses, figures and [English SI methods](DPH_FA_LPGDS_WT_MD/methods/SI_methods_EN.md). Earlier versions remain accessible through Git history.
 
-The repository documents **both fatty-acid and PFAS fingerprint discrimination** on the L-PGDS–DPH platform. The two datasets have separate scripts and dependencies so either study can be reproduced independently.
-
-## DPH–L-PGDS (WT) molecular dynamics
-
-The [MD module](DPH_LPGDS_WT_MD/) documents one WT–DPH molecular dynamics trajectory, including simulation inputs, analysis, figures, and [English SI methods](DPH_LPGDS_WT_MD/methods/SI_methods_EN.md). Original large trajectories and XML files are losslessly stored as gzip parts. Run `python3 DPH_LPGDS_WT_MD/scripts/restore_data.py` to restore the archived files and `python3 DPH_LPGDS_WT_MD/scripts/verify_data.py` to check the deposited SHA-256 hashes. This single trajectory provides descriptive structural observations, not an independently replicated binding assessment or an affinity measurement.
-
-
-## C18:2 near WT–DPH molecular dynamics
-
-The [WT–DPH–C18:2 MD module](DPH_FA_LPGDS_WT_MD/) documents C18:2 behavior after addition near the selected WT–DPH endpoint, including complete restorable trajectories, analysis, English figures and [SI methodology](DPH_FA_LPGDS_WT_MD/methods/SI_methods_EN.md). This selected 5 ns trajectory describes local contacts and geometric shielding; it does not establish cooperative affinity, enclosed-pocket residence or a fluorescence response.
-
-
-The C18:2 MD module has been updated to the experimentally used **9Z,12Z linoleate (CAS60-33-3)**. It replaces the earlier E/E-isomer data (CAS506-21-8); prior versions remain in Git history. The current selected trajectory and all available same-batch repeat summaries are identified in the module.
+These short MD trajectories provide descriptive structural observations; they do not independently establish binding affinity, cooperative binding, or the origin of fluorescence changes.
